@@ -1,222 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Insurance Risk Calculator</title>
+  <meta charset="UTF-8">
+  <title>Health Insurance Risk Calculator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Insurance Risk Calculator</h1>
+  <div class="container">
+    <h1>Health Insurance Risk Calculator</h1>
+    
+    <form id="riskForm">
+      <div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" placeholder="Enter your age" required min="0">
+      </div>
+      
+      <div>
+        <label for="weight">Weight (lbs):</label>
+        <input type="number" id="weight" name="weight" placeholder="Enter your weight in lbs" required min="50" max="800">
+      </div>
 
-  <!-- Age Input -->
-  <div>
-    <label for="age">Age:</label>
-    <input type="number" id="age" placeholder="Enter your age" />
+      <div>
+        <label for="heightFeet">Height (Feet):</label>
+        <select id="heightFeet" name="heightFeet" required>
+          <option value="">Select</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="heightInches">Height (Inches):</label>
+        <select id="heightInches" name="heightInches" required>
+          <option value="">Select</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="bloodPressure">Blood Pressure Category:</label>
+        <select id="bloodPressure" name="bloodPressure" required>
+          <option value="">Select</option>
+          <option value="normal">Normal (Systolic < 120 & Diastolic < 80)</option>
+          <option value="elevated">Elevated (Systolic 120-129 & Diastolic < 80)</option>
+          <option value="stage1">Hypertension Stage 1 (Systolic 130-139 OR Diastolic 80-89)</option>
+          <option value="stage2">Hypertension Stage 2 (Systolic 140+ OR Diastolic 90+)</option>
+          <option value="crisis">Hypertensive Crisis (Systolic > 180 OR Diastolic > 120)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Family Disease History:</label><br>
+        <input type="checkbox" id="familyDiseaseCancer" name="familyDisease" value="cancer">
+        <label for="familyDiseaseCancer">Cancer</label><br>
+        <input type="checkbox" id="familyDiseaseDiabetes" name="familyDisease" value="diabetes">
+        <label for="familyDiseaseDiabetes">Diabetes</label><br>
+        <input type="checkbox" id="familyDiseaseAlzheimers" name="familyDisease" value="alzheimers">
+        <label for="familyDiseaseAlzheimers">Alzheimer’s</label><br>
+      </div>
+      
+      <button type="submit">Submit</button>
+    </form>
+    
+    <div id="results"></div>
   </div>
-
-  <!-- Weight Input -->
-  <div>
-    <label for="weight">Weight (kg):</label>
-    <input type="number" id="weight" placeholder="Enter your weight in kg" />
-  </div>
-
-  <!-- Height Dropdown (to reduce user mistakes) -->
-  <div>
-    <label for="heightDropdown">Height (m):</label>
-    <select id="heightDropdown">
-      <option value="">-- Select Height --</option>
-      <option value="1.50">1.50 m</option>
-      <option value="1.55">1.55 m</option>
-      <option value="1.60">1.60 m</option>
-      <option value="1.65">1.65 m</option>
-      <option value="1.70">1.70 m</option>
-      <option value="1.75">1.75 m</option>
-      <option value="1.80">1.80 m</option>
-      <option value="1.85">1.85 m</option>
-      <option value="1.90">1.90 m</option>
-      <option value="1.95">1.95 m</option>
-      <option value="2.00">2.00 m</option>
-    </select>
-  </div>
-
-  <!-- Blood Pressure Input -->
-  <div>
-    <label for="systolic">Systolic BP:</label>
-    <input type="number" id="systolic" placeholder="Enter your systolic BP" />
-  </div>
-
-  <!-- Family Disease Checkboxes -->
-  <div>
-    <label>Family Disease History:</label><br>
-    <input type="checkbox" id="familyDiseaseCancer" name="familyDisease" value="cancer">
-    <label for="familyDiseaseCancer">Cancer</label><br>
-
-    <input type="checkbox" id="familyDiseaseDiabetes" name="familyDisease" value="diabetes">
-    <label for="familyDiseaseDiabetes">Diabetes</label><br>
-
-    <input type="checkbox" id="familyDiseaseHeart" name="familyDisease" value="heart">
-    <label for="familyDiseaseHeart">Heart Disease</label><br>
-  </div>
-
-  <!-- Calculate Button -->
-  <button onclick="calculateTotalRisk()">Calculate Risk</button>
-
-  <!-- Results Display -->
-  <div id="results"></div>
-
-  <script>
-    /****************************************
-     * 1) Calculate Age Points
-     ****************************************/
-    function calculateAgePoints() {
-      const ageInput = document.getElementById("age");
-      const age = ageInput ? parseInt(ageInput.value, 10) : 0;
-
-      // Example logic:
-      // <30 => 1 point, 30-49 => 2 points, >=50 => 3 points
-      if (age < 30) {
-        return 1;
-      } else if (age < 50) {
-        return 2;
-      } else {
-        return 3;
-      }
-    }
-
-    /****************************************
-     * 2) Calculate BMI Points
-     ****************************************/
-    function calculateBMIPoints() {
-      const weightInput = document.getElementById("weight");
-      const heightDropdown = document.getElementById("heightDropdown");
-
-      const weight = weightInput ? parseFloat(weightInput.value) : 0;
-      const height = heightDropdown ? parseFloat(heightDropdown.value) : 0;
-
-      // If no valid height is selected, return 0
-      if (!height || height <= 0) {
-        return 0;
-      }
-
-      const bmi = weight / (height * height);
-
-      // Example logic:
-      // <18.5 => 1 point, 18.5-24.9 => 2 points, 25-29.9 => 3 points, >=30 => 4 points
-      if (bmi < 18.5) {
-        return 1;
-      } else if (bmi < 25) {
-        return 2;
-      } else if (bmi < 30) {
-        return 3;
-      } else {
-        return 4;
-      }
-    }
-
-    /****************************************
-     * 3) Calculate Blood Pressure Points
-     ****************************************/
-    function calculateBloodPressurePoints() {
-      const systolicInput = document.getElementById("systolic");
-      const systolic = systolicInput ? parseInt(systolicInput.value, 10) : 0;
-
-      // Example logic:
-      // <120 => 1 point, 120-129 => 2 points, 130-139 => 3 points, >=140 => 4 points
-      if (systolic < 120) {
-        return 1;
-      } else if (systolic < 130) {
-        return 2;
-      } else if (systolic < 140) {
-        return 3;
-      } else {
-        return 4;
-      }
-    }
-
-    /****************************************
-     * 4) Family Disease Logic
-     ****************************************/
-    // A) Gather which diseases are checked
-    function getSelectedFamilyDiseases() {
-      const diseases = [];
-      const checkboxes = document.querySelectorAll('input[name="familyDisease"]:checked');
-      checkboxes.forEach((checkbox) => {
-        diseases.push(checkbox.value);
-      });
-      return diseases;
-    }
-
-    // B) Define point values for each disease
-    const familyDiseasePoints = {
-      cancer: 2,
-      diabetes: 2,
-      heart: 3
-    };
-
-    // C) Calculate total points from family diseases
-    function calculateFamilyDiseaseRisk(diseasesArray) {
-      let totalPoints = 0;
-      diseasesArray.forEach((disease) => {
-        if (familyDiseasePoints[disease] !== undefined) {
-          totalPoints += familyDiseasePoints[disease];
-        }
-      });
-      return totalPoints;
-    }
-
-    /****************************************
-     * 5) Determine Risk Category
-     ****************************************/
-    function determineRiskCategory(totalRiskPoints) {
-      // Example logic:
-      // <5 => Low, 5-9 => Moderate, >=10 => High
-      if (totalRiskPoints < 5) {
-        return "Low Risk";
-      } else if (totalRiskPoints < 10) {
-        return "Moderate Risk";
-      } else {
-        return "High Risk";
-      }
-    }
-
-    /****************************************
-     * 6) Display Results
-     ****************************************/
-    function displayRiskResults(totalRiskPoints, riskCategory) {
-      const resultsDiv = document.getElementById("results");
-      if (!resultsDiv) {
-        alert("No results element found!");
-        return;
-      }
-      resultsDiv.innerHTML = `
-        <p><strong>Total Risk Points:</strong> ${totalRiskPoints}</p>
-        <p><strong>Risk Category:</strong> ${riskCategory}</p>
-      `;
-    }
-
-    /****************************************
-     * 7) Main Calculation Function
-     ****************************************/
-    function calculateTotalRisk() {
-      // Gather other risk factor points
-      const agePoints = calculateAgePoints();
-      const bmiPoints = calculateBMIPoints();
-      const bloodPressurePoints = calculateBloodPressurePoints();
-
-      // Gather family disease selection
-      const selectedFamilyDiseases = getSelectedFamilyDiseases();
-      const familyDiseaseRisk = calculateFamilyDiseaseRisk(selectedFamilyDiseases);
-
-      // Sum all points
-      const totalRiskPoints = agePoints + bmiPoints + bloodPressurePoints + familyDiseaseRisk;
-
-      // Determine risk category
-      const riskCategory = determineRiskCategory(totalRiskPoints);
-
-      // Display the results
-      displayRiskResults(totalRiskPoints, riskCategory);
-    }
-  </script>
-
+  
+  <script src="script.js"></script>
 </body>
 </html>
