@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const API_BASE_URL = "https://healthinsuranceriskcalc-back-cgcsbha9dsaydnhp.centralus-01.azurewebsites.net/api/calculate-risk";
 
-    for (let i = 2; i <= 6; i++) {
+    for (let i = 2; i <= 7; i++) {  
         let option = document.createElement("option");
         option.value = i;
         option.textContent = `${i} ft`;
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             weight: document.getElementById("weight").value,
             heightFeet: document.getElementById("heightFeet").value,
             heightInches: document.getElementById("heightInches").value,
-            bloodPressure: document.getElementById("bloodPressure").value,  // ✅ Added Blood Pressure Dropdown Value
+            bloodPressure: document.getElementById("bloodPressure").value,
             familyDiseases: Array.from(document.querySelectorAll('input[name="familyDisease"]:checked'))
                                 .map(disease => disease.value)
         };
