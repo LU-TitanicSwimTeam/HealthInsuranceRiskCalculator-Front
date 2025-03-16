@@ -1,48 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Risk Calculator Test</title>
+  <meta charset="UTF-8">
+  <title>Health Insurance Risk Calculator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Health Insurance Risk Calculator</h1>
-  
-  <div>
-    <label for="age">Age:</label>
-    <input type="number" id="age" placeholder="Enter your age" />
+
+  <div class="container">
+    <h1>Health Insurance Risk Calculator</h1>
+    
+    <form id="riskForm">
+      <div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" placeholder="Enter your age" required min="0">
+      </div>
+      
+      <div>
+        <label for="weight">Weight (lbs):</label>
+        <input type="number" id="weight" name="weight" placeholder="Enter your weight in lbs" required min="50" max="800">
+      </div>
+      
+      <div>
+        <label for="heightFeet">Height (Feet):</label>
+        <select id="heightFeet" name="heightFeet" required>
+          <option value="">Select</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="heightInches">Height (Inches):</label>
+        <select id="heightInches" name="heightInches" required>
+          <option value="">Select</option>
+        </select>
+      </div>
+      
+      <div>
+        <label for="systolic">Systolic BP:</label>
+        <input type="number" id="systolic" name="systolic" placeholder="Enter your systolic BP" required>
+      </div>
+
+      <div>
+        <label for="diastolic">Diastolic BP:</label>
+        <input type="number" id="diastolic" name="diastolic" placeholder="Enter your diastolic BP" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Family Disease History:</label><br>
+        <input type="checkbox" id="familyDiseaseCancer" name="familyDisease" value="cancer">
+        <label for="familyDiseaseCancer">Cancer</label><br>
+        <input type="checkbox" id="familyDiseaseDiabetes" name="familyDisease" value="diabetes">
+        <label for="familyDiseaseDiabetes">Diabetes</label><br>
+        <input type="checkbox" id="familyDiseaseAlzheimers" name="familyDisease" value="alzheimers">
+        <label for="familyDiseaseAlzheimers">Alzheimer’s</label><br>
+      </div>
+      
+      <button type="submit">Submit</button>
+    </form>
+    
+    <div id="results"></div>
   </div>
   
-  <div>
-    <label for="weight">Weight (kg):</label>
-    <input type="number" id="weight" placeholder="Enter your weight in kg" />
-  </div>
-  
-  <div>
-    <label for="height">Height (m):</label>
-    <input type="number" id="height" placeholder="Enter your height in meters" step="0.01" />
-  </div>
-  
-  <div>
-    <label for="systolic">Systolic BP:</label>
-    <input type="number" id="systolic" placeholder="Enter your systolic BP" />
-  </div>
-  
-  <div class="form-group">
-    <label>Family Disease History:</label><br>
-    <input type="checkbox" id="familyDiseaseCancer" name="familyDisease" value="cancer">
-    <label for="familyDiseaseCancer">Cancer</label><br>
-    <input type="checkbox" id="familyDiseaseDiabetes" name="familyDisease" value="diabetes">
-    <label for="familyDiseaseDiabetes">Diabetes</label><br>
-    <input type="checkbox" id="familyDiseaseHeart" name="familyDisease" value="heart">
-    <label for="familyDiseaseHeart">Heart Disease</label><br>
-  </div>
-  
-  <button onclick="calculateTotalRisk()">Calculate Risk</button>
-  
-  <div id="results"></div>
-  
-  <!-- Link to script.js file -->
   <script src="script.js"></script>
 </body>
 </html>
