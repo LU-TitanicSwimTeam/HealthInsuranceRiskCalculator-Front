@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Risk Calculator Test</title>
+</head>
+<body>
+  <h1>Health Insurance Risk Calculator</h1>
+  
+  <div>
+    <label for="age">Age:</label>
+    <input type="number" id="age" placeholder="Enter your age" />
+  </div>
+  
+  <div>
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" placeholder="Enter your weight in kg" />
+  </div>
+  
+  <div>
+    <label for="height">Height (m):</label>
+    <input type="number" id="height" placeholder="Enter your height in meters" step="0.01" />
+  </div>
+  
+  <div>
+    <label for="systolic">Systolic BP:</label>
+    <input type="number" id="systolic" placeholder="Enter your systolic BP" />
+  </div>
+  
+  <div class="form-group">
+    <label>Family Disease History:</label><br>
+    <input type="checkbox" id="familyDiseaseCancer" name="familyDisease" value="cancer">
+    <label for="familyDiseaseCancer">Cancer</label><br>
+    <input type="checkbox" id="familyDiseaseDiabetes" name="familyDisease" value="diabetes">
+    <label for="familyDiseaseDiabetes">Diabetes</label><br>
+    <input type="checkbox" id="familyDiseaseHeart" name="familyDisease" value="heart">
+    <label for="familyDiseaseHeart">Heart Disease</label><br>
+  </div>
+  
+  <button onclick="calculateTotalRisk()">Calculate Risk</button>
+  
+  <div id="results"></div>
+  
+  <!-- Link to script.js file -->
+  <script src="script.js"></script>
+</body>
+</html>
