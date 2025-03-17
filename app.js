@@ -1,3 +1,5 @@
+const apiURL = "https://healthinsuranceriskcalc-back-cgcsbha9dsaydnhp.centralus-01.azurewebsites.net/api/calculate-risk";
+
 document.addEventListener("DOMContentLoaded", function() {
     const heightFeetSelect = document.getElementById("heightFeet");
     const heightInchesSelect = document.getElementById("heightInches");
@@ -18,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         heightInchesSelect.appendChild(option);
     }
 
-    document.getElementById("riskForm").addEventListener("submit", function(event) {
+    document.getElementById("riskForm").addEventListener("submit", async function(event) {
         event.preventDefault();
 
         const heightFeet = heightFeetSelect.value;
@@ -46,7 +48,28 @@ document.addEventListener("DOMContentLoaded", function() {
             weight: weight
         };
 
-        console.log("Form Data Submitted:", formData);
+        try {
+            // Send request to backend
+            const response = await fetch(apiURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert(`Risk Score: ${result.riskScore}`);
+            } else {
+                throw new Error(result.message || "Something went wrong");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            errorMessage.textContent = "Failed to get risk score. Please try again later.";
+        }
+        
         alert("Form submitted! (Data will be processed by the server)");
     });
 });
