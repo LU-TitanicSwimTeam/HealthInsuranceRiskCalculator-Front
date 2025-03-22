@@ -48,13 +48,22 @@
       </div>
 
       <div class="form-group">
-        <label>Family Disease History:</label><br>
-        <input type="checkbox" id="familyDiseaseCancer" name="familyDisease" value="cancer">
-        <label for="familyDiseaseCancer">Cancer</label><br>
-        <input type="checkbox" id="familyDiseaseDiabetes" name="familyDisease" value="diabetes">
-        <label for="familyDiseaseDiabetes">Diabetes</label><br>
-        <input type="checkbox" id="familyDiseaseAlzheimers" name="familyDisease" value="alzheimers">
-        <label for="familyDiseaseAlzheimers">Alzheimer’s</label><br>
+        <label>Family Disease History:</label>
+
+        <div class="checkbox-group">
+          <label for="familyDiseaseCancer">Cancer</label>
+          <input type="checkbox" id="familyDiseaseCancer" name="familyDisease" value="cancer">
+        </div>
+        
+        <div class="checkbox-group">
+          <label for="familyDiseaseDiabetes">Diabetes</label>
+          <input type="checkbox" id="familyDiseaseDiabetes" name="familyDisease" value="diabetes">
+        </div>
+
+        <div class="checkbox-group">
+          <label for="familyDiseaseAlzheimers">Alzheimer’s</label>
+          <input type="checkbox" id="familyDiseaseAlzheimers" name="familyDisease" value="alzheimers">
+        </div>
       </div>
       
       <button type="submit">Submit</button>
