@@ -4,6 +4,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const API_BASE_URL = "https://healthinsuranceriskcalc-back-cgcsbha9dsaydnhp.centralus-01.azurewebsites.net/api/calculate-risk";
 
+
+    //  ping the backend when page loads
+    fetch(`${API_BASE_URL}/api/ping`)
+        .then(res => res.json())
+        .then(data => console.log("Ping success:", data.message))
+        .catch(err => console.error("Ping failed:", err));
+
+    const CALCULATE_ENDPOINT = `${API_BASE_URL}/api/calculate-risk`;
+
+
     for (let i = 2; i <= 7; i++) {  
         let option = document.createElement("option");
         option.value = i;
