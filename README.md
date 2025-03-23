@@ -1,6 +1,6 @@
 # Health Insurance Risk Calculator
 
-Rudra Patel, Ethan Myers, Ben Elier, Kolade Idris, Michael Poole
+Rudra Patel, Ethan Myers, Ben Eiler, Kolade Idris, Michael Poole
 
 rudrappatel@lewisu.edu, benjaminseiler@lewisu.edu, koladeidris@lewisu.edu
 
