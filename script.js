@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         heightFeetSelect.appendChild(option);
     }
 
-    for (let i = 1; i <= 11; i++) {
+    for (let i = 0; i <= 11; i++) {
         let option = document.createElement("option");
         option.value = i;
         option.textContent = `${i} in`;
